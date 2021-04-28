@@ -14,10 +14,12 @@ export default function GuidesPage({ guides }) {
   console.log(guides);
   return (
     <Layout title="Game Guides" description="Game Guides">
-      <h1>Game Guides</h1>
-      {guides.map((guide) => (
-        <GuideItem key={guide.id} guide={guide} />
-      ))}
+      <h1 className="border-b">Game Guides</h1>
+      <div className="row row-cols-1 row-cols-md-3 g-4">
+        {guides.map((guide) => (
+          <GuideItem key={guide.id} guide={guide} />
+        ))}
+      </div>
     </Layout>
   );
 }

@@ -1,4 +1,5 @@
 import "@styles/customTheme.scss";
+import "@styles/globals.css";
 
 function MyApp({ Component, pageProps }) {
   return <Component {...pageProps} />;
