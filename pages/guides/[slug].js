@@ -1,6 +1,8 @@
 import axios from "axios";
 import Image from "next/image";
 import ReactMarkdown from "react-markdown";
+import Link from "next/link";
+import remarkslug from "remark-slug";
 
 import Layout from "@components/Layout";
 
@@ -16,7 +18,7 @@ export async function getStaticPaths() {
 export async function getStaticProps({ params: { slug } }) {
   const res = await axios.get(`http://localhost:1337/guides?slug=${slug}`);
   const guides = await res.data;
-  return { props: { guide: guides[0] } };
+  return { props: { guide: guides[0] }, revalidate: 1 };
 }
 
 export default function GuidePage({ guide }) {
@@ -32,7 +34,11 @@ export default function GuidePage({ guide }) {
               height={400}
             />
 
-            <ReactMarkdown>{guide.description}</ReactMarkdown>
+            <ReactMarkdown
+              children={guide.description}
+              remarkPlugins={[remarkslug]}
+            />
+            {/* <ReactMarkdown>{guide.description}</ReactMarkdown> */}
           </div>
           <div className="col-12 col-md-4">
             <div className="card">
@@ -50,11 +56,14 @@ export default function GuidePage({ guide }) {
             <div className="card mt-2">
               <div className="card-body">
                 <h1 className="border-b">Table of Contents</h1>
-                <ul className="list-group list-group-flush">
-                  <li className="list-group-item">An item</li>
+                <ReactMarkdown>{guide.content}</ReactMarkdown>
+                {/* <ul className="list-group list-group-flush">
+                  <li className="list-group-item">
+                    <a href={`/${guide.slug}#prologue`}>Prologue</a>
+                  </li>
                   <li className="list-group-item">A second item</li>
                   <li className="list-group-item">A third item</li>
-                </ul>
+                </ul> */}
               </div>
             </div>
           </div>
