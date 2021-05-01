@@ -35,22 +35,25 @@ export default function Header() {
               </Link>
             </li>
           </ul>
-
+          {/* 
           <form className="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3">
             <input
               type="search"
               className="form-control form-control-dark"
               placeholder="Search..."
             />
-          </form>
+          </form> */}
 
           <div className="text-end">
-            <button type="button" className="btn btn-outline-light me-2">
+            <Link href="/guides/add">
+              <a className="btn btn-warning">Add a Guide</a>
+            </Link>
+            {/* <button type="button" className="btn btn-outline-light me-2">
               Login
             </button>
             <button type="button" className="btn btn-warning">
               Sign-up
-            </button>
+            </button> */}
           </div>
         </div>
       </div>

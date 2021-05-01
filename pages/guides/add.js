@@ -1,4 +1,5 @@
 import Layout from "@components/Layout";
+import axios from "axios";
 import { useForm } from "react-hook-form";
 
 export default function AddGuide() {
@@ -8,7 +9,23 @@ export default function AddGuide() {
     watch,
     formState: { errors },
   } = useForm();
-  const onSubmit = (data) => console.log(data);
+  const onSubmit = async (data) => {
+    console.log(data);
+    try {
+      const res = await axios.post("http://localhost:1337/guides", data);
+      // console.log(res.data);
+      // const formData = new FormData();
+      // console.log(data.image[0]);
+      // formData.append("files", data.image[0]);
+      // formData.append("ref", "guides");
+      // formData.append("refId", res.data.id);
+      // formData.append("field", "image");
+      // await axios.post("http://localhost:1337/upload", formData);
+      console.log(res.data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   return (
     <Layout title="Add a Guide">
@@ -33,6 +50,7 @@ export default function AddGuide() {
             Description
           </label>
           <textarea
+            rows="10"
             type="text"
             className="form-control"
             id="exampleInputPassword1"
@@ -41,6 +59,20 @@ export default function AddGuide() {
           {errors.description && <span>This description is required</span>}
         </div>
 
+        <div>
+          <label htmlFor="date" className="form-label">
+            Date
+          </label>
+          <input
+            className="form-control"
+            type="date"
+            name="date"
+            id="date"
+            {...register("date", { required: true })}
+          />
+          {errors.date && <span>The dateis required</span>}
+        </div>
+        {/* 
         <div className="mb-3">
           <label htmlFor="image" className="form-label">
             Image
@@ -52,10 +84,10 @@ export default function AddGuide() {
             {...register("image", { required: true })}
           />
           {errors.image && <span>This image is required</span>}
-        </div>
+        </div> */}
 
-        <button type="submit" className="btn btn-primary">
-          Submit
+        <button type="submit" className="btn btn-primary mt-2">
+          Submit Guide
         </button>
       </form>
       {/* <form onSubmit={handleSubmit(onSubmit)}>

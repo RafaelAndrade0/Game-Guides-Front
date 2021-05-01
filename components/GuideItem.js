@@ -9,7 +9,11 @@ export default function GuideItem({ guide }) {
           <div
             className="card card-cover h-100 overflow-hidden text-white bg-dark rounded-5 shadow-lg"
             style={{
-              backgroundImage: `url(${guide.image[0].formats.medium.url})`,
+              backgroundImage: `url(${
+                guide.image[0]?.formats
+                  ? guide.image[0].formats.medium.url
+                  : "/images/placeholder.jpg"
+              })`,
             }}
           >
             <div className="d-flex flex-column h-100 p-5 pb-3 text-white text-shadow-1">

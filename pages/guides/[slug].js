@@ -28,11 +28,13 @@ export default function GuidePage({ guide }) {
       <div className="container">
         <div className="row">
           <div className="col-12 col-md-8">
-            <Image
-              src={guide.image[0].formats.medium.url}
-              width={900}
-              height={400}
-            />
+            {guide.image[0]?.formats && (
+              <Image
+                src={guide.image[0].formats.medium.url}
+                width={900}
+                height={400}
+              />
+            )}
 
             <ReactMarkdown
               children={guide.description}
